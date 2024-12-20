@@ -22,8 +22,8 @@ public class DebtServImpl implements DebtServ {
         return debtRepo.getAllPaidDebt();
     }
 
-    public List<Debt> getAllUnpaidDebt() {
-        return debtRepo.getAllUnpaidDebt();
+    public List<Debt> getAllUnpaidDebt(Client client) {
+        return debtRepo.getAllUnpaidDebt(client);
     }
 
     public List<Debt> selectAll() {
@@ -41,5 +41,12 @@ public class DebtServImpl implements DebtServ {
     public Debt getDebtById(int id) {
         return debtRepo.getDebtById(id);
     }
+
+    @Override
+    public void updateDebt(Debt debt) {
+        debtRepo.updateDebt(debt);
+    }
+
+    
 
 }

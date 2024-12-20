@@ -1,6 +1,7 @@
 package com.baf.data.repositories.list;
 
 import com.baf.data.entities.Client;
+import com.baf.data.entities.User;
 import com.baf.data.repositories.ClientRepository;
 
 public class ClientRepositoryImplList extends RepositoryImplList<Client> implements ClientRepository{
@@ -8,7 +9,7 @@ public class ClientRepositoryImplList extends RepositoryImplList<Client> impleme
     @Override
     public Client selectByTel(String tel) {
         for (Client client : data) {
-            if (client.getTelephone() == tel.trim()){
+            if (client.getTelephone().equals(tel)){
                 return client;
             }
         }
@@ -18,7 +19,7 @@ public class ClientRepositoryImplList extends RepositoryImplList<Client> impleme
     @Override
     public Client selectBySurname(String surname) {
         for (Client client : data) {
-            if (client.getSurname() == surname.trim()){
+            if (client.getSurname().equals(surname)){
                 return client;
             }
         }
@@ -33,6 +34,15 @@ public class ClientRepositoryImplList extends RepositoryImplList<Client> impleme
             }
         }
         return null;
+    }
+
+    @Override
+    public void createAccount(int id, User user) {
+        for (Client client : data) {
+            if (client.getId() == id){
+                client.setUser(user);
+            }
+        }
     }
     
 }

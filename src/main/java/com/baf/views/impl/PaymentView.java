@@ -1,44 +1,52 @@
 package com.baf.views.impl;
 
 import java.util.Date;
-import java.util.Scanner;
 
+import com.baf.data.entities.Debt;
 import com.baf.data.entities.Payment;
+import com.baf.services.DebtServ;
 
 public class PaymentView extends ViewImpl<Payment> {
-    private Scanner scanner;
+    private DebtServ debtServ;
+    private DebtView debtView;
      
 
-    public PaymentView(Scanner scanner) {
-        this.scanner = scanner;
+    public PaymentView(DebtServ debtServ, DebtView debtView) {
+       this.debtServ = debtServ;
+        this.debtView = debtView;
     }
 
     @Override
     public Payment saisie() {
-       // Étape 1 : Lister les dettes non soldées
-
-        // Étape 2 : Sélectionner une dette
-        System.out.println("Sélectionner une dette : ");
-        int idDebt = scanner.nextInt();
-        if (idDebt < 0 || idDebt > 10) {
+        Payment payment = new Payment();
+        debtView.displayAllUnpaidDebts();
+        System.out.println("Saisir l'id de la dette : ");
+        int idDebt = scanner.nextInt(); 
+        Debt dette = debtServ.getDebtById(idDebt);
+        if (dette == null) {
             System.out.println("Dette inexistante");
             return null;
         }
-        // On recupère la dette dans une variable debt
-
-        // Étape 3 : Saisir le montant du paiement
+        
         System.out.println("Saisir le montant du paiement : ");
         int amount = scanner.nextInt();
-        /* if (amount > selectedDebt.getMontantRestant()) {
-            System.out.println("Le montant du paiement dépasse le montant restant !");
+        if (amount <= 0) {
+            System.out.println("Le montant doit être supérieur à 0");
             return null;
-        } */
-
-        // Etape 4 : Créer un objet Payment
-        Payment payment = new Payment();
+        }
         payment.setAmount(amount);
         payment.setDate(new Date());
-        
+        dette.setPaidMount(dette.getPaidMount() + amount);
+        dette.setRemainingMount(dette.getRemainingMount() - amount);
+        payment.setDebt(dette);
+        dette.addPayment(payment);
+        debtServ.updateDebt(dette);
         return payment;
+    }
+
+    @Override
+    public void show(Payment data) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'show'");
     }
 }

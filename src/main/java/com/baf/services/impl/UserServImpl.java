@@ -35,4 +35,14 @@ public class UserServImpl implements UserServ {
         return userRepo.selectAll();
     }
 
+    @Override
+    public User selectByLogin(String login) {
+        return userRepo.selectByLogin(login);
+    }
+
+    @Override
+    public User selectByMail(String mail) {
+        return userRepo.selectByMail(mail);
+    }
+
 }

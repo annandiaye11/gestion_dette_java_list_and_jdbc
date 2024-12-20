@@ -4,6 +4,8 @@ import com.baf.core.Repository;
 import com.baf.data.entities.User;
 
 public interface UserRepository extends Repository<User> {
-    public void toggleUser(User user);
-    public User getUserById(int userId);
+    void toggleUser(User user);
+    User getUserById(int userId);
+    User selectByLogin(String login);
+    User selectByMail(String mail);
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import com.baf.data.entities.User;
 import com.baf.data.repositories.UserRepository;
 
-public class UserList implements UserRepository {
+public class UserList extends RepositoryImplList<User> implements UserRepository {
 
     private List<User> users = new ArrayList<>();
 
@@ -39,6 +39,26 @@ public class UserList implements UserRepository {
     @Override
     public List<User> selectAll() {
         return users;
+    }
+
+    @Override
+    public User selectByLogin(String login) {
+        for (User u : users) {
+            if (u.getLogin() == login) {
+                return u;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public User selectByMail(String mail) {
+        for (User u : users) {
+            if (u.getEmail() == mail) {
+                return u;
+            }
+        }
+        return null;
     }
 
 }

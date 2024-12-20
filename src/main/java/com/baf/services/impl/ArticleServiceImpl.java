@@ -29,5 +29,10 @@ public class ArticleServiceImpl  implements ArticleService{
     public void insert(Article data) {
         articleRepository.insert(data);
     }
+
+    @Override
+    public Article selectById(int id) {
+       return articleRepository.selectById(id);
+    }
     
 }

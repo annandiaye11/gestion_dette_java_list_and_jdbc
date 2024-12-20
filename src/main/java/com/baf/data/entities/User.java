@@ -12,4 +12,8 @@ public class User {
     private String password;
     private Role role;
     private Boolean isActive;
+    private static int nbre = 0;
+    public User() {
+        idUser = nbre++;
+    }
 }

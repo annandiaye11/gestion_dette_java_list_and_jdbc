@@ -11,9 +11,11 @@ public interface DebtServ extends Service<Debt> {
 
     List<Debt> getAllPaidDebt();
 
-    List<Debt> getAllUnpaidDebt();
+    List<Debt> getAllUnpaidDebt(Client client);
 
     List<Debt> getDebtsFromClient(Client client);
 
     Debt getDebtById(int id);
+    void updateDebt(Debt debt);
+    
 }

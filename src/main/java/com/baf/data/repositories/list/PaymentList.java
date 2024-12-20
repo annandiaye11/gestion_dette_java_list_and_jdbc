@@ -1,21 +1,16 @@
 package com.baf.data.repositories.list;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.baf.data.entities.Payment;
 import com.baf.data.repositories.PaymentRepository;
 
-public class PaymentList implements PaymentRepository {
-    private List<Payment> payments = new ArrayList<>();
+public class PaymentList extends RepositoryImplList<Payment> implements PaymentRepository{
 
     @Override
-    public List<Payment> selectAll() {
-        return payments;
+    public List<Payment> selectAllByDebtId(int idDebt) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'selectAllByDebtId'");
     }
-
-    @Override
-    public void insert(Payment payment) {
-        payments.add(payment);
-    }
+    
 }
